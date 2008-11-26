@@ -1,0 +1,24 @@
+= Upcoming Events
+
+A simple extension that allows creation and management of important dates
+within a Radiant CMS instance.
+
+After installation be sure to update Radiant!
+
+  rake radiant:extensions:upcoming_events:update
+  rake radiant:extensions:upcoming_events:migrate
+
+You can then add new events using the administrative interface and access
+them in your templates using the supplied Radius tags.
+
+Example:
+
+<r:event next="true">
+  Only <r:event:distance_to_now/> until <r:event:name/>!
+</r:event>
+
+This extension contains a copy of the Rails calendar date select plugin
+(c) Tim Harper. All other work (c) 2008 Nick Plante.
+
+http://github.com/zapnap/radiant-upcoming-events-extension
+http://code.google.com/p/calendardateselect

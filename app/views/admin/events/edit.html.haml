@@ -1,0 +1,29 @@
+- content_for 'page_css' do
+  :sass
+    p.title
+      margin: 10px 0 !important
+
+    #content .form-area div.error-with-field
+      input.textbox
+        font-family: Georgia,Palatino,"Times New Roman",Times,serif
+        font-size: 200%
+        width: 100%
+
+= calendar_date_select_includes
+
+%h1= @event.new_record? ? 'New Event' : 'Edit Event'
+
+- form_for [:admin, @event] do |f|
+  .form-area
+    %p.title
+      %label Name
+      = f.text_field :name, :class => 'textbox'
+    %p.title
+      %label Date
+      = calendar_date_select :event, :scheduled_at, :time => true, :embedded => true, :class => 'textbox'
+    
+  %p.buttons
+    - button_text = @event.new_record? ? 'Create' : 'Save Changes'
+    = submit_tag button_text, :class => 'button'
+    or
+    = link_to 'Cancel', admin_events_url

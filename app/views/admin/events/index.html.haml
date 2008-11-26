@@ -1,0 +1,54 @@
+- content_for 'page_css' do
+  :sass
+    p.new
+      a
+        color: #000
+        border: 1px solid #ddf
+        padding: 6px
+        text-decoration: none
+
+        &:hover
+          background: #efefff
+
+    th.remove
+      width: 100px
+
+    td.remove
+      width: 100px
+      font-size: 0.8em
+      vertical-align: center
+
+      a
+        text-decoration: none
+        color: #000
+
+      img
+        margin-bottom: 3px
+
+    #content #events.index .page .info
+      top: 0
+
+%h1 Upcoming Events
+
+%table#events.index{:summary => "Listing of Events"}
+  %thead
+    %tr
+      %th.name Name
+      %th.date Date
+      %th.modify Modify
+  %tbody
+    - if @events.empty?
+      %tr
+        %td.note{:colspan => 3} No Events
+    - else 
+      - @events.each do |event|
+        %tr.node.level-1{:id => "event-#{event.id}"}
+          %td.page
+            %span.w1
+              = link_to event.name, edit_admin_event_url(event)
+
+          %td.event= event.scheduled_at
+          %td.remove
+            = link_to("#{image('minus.png')} Remove", admin_event_url(event), :method => :delete, :alt => 'remove event', :confirm => 'Are you sure? This will delete the event!')
+
+%p.new= link_to('New Event', new_admin_event_url)
