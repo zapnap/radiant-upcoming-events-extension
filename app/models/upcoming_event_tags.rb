@@ -68,11 +68,12 @@ module UpcomingEventTags
     Displays the date of the current event.
 
     *Usage:*
-    <pre><code><r:event:date/></code></pre>
+    <pre><code><r:event:date [format="%d %b %y"]/></code></pre>
   }
   tag 'event:date' do |tag|
     event = tag.locals.event
-    event.scheduled_at.to_s
+    format = tag.attr['format'].nil? ? "%d %b %y" : tag.attr['format']
+    event.scheduled_at.strftime(format)
   end
 
   desc %{
