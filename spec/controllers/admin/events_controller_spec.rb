@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../../spec_helper'
 
 describe Admin::EventsController do
-  scenario :users
+  dataset :users
 
   integrate_views
 
@@ -9,9 +9,16 @@ describe Admin::EventsController do
     login_as :existing
   end
 
+  def mock_event
+    mock_model(Event, {
+      :name => "Happy Fun Time",
+      :scheduled_at => Time.now
+    })
+  end
+
   context 'index' do
     before(:each) do
-      Event.stub!(:find).and_return(@events = [mock_model(Event)])
+      Event.stub!(:find).and_return(@events = [mock_event])
     end
 
     it 'should render the index template' do
@@ -31,7 +38,7 @@ describe Admin::EventsController do
 
   context 'create' do
     before(:each) do
-      Event.stub!(:new).and_return(@event = mock_model(Event))
+      Event.stub!(:new).and_return(@event = mock_event)
     end
 
     it 'should create a new event and redirect' do
@@ -52,7 +59,7 @@ describe Admin::EventsController do
 
   context 'edit' do
     before(:each) do
-      Event.stub!(:find).and_return(@event = mock_model(Event))
+      Event.stub!(:find).and_return(@event = mock_event)
     end
 
     it 'should render the edit template' do
@@ -64,7 +71,7 @@ describe Admin::EventsController do
 
   context 'update' do
     before(:each) do
-      Event.stub!(:find).and_return(@event = mock_model(Event))
+      Event.stub!(:find).and_return(@event = mock_event)
     end
 
     it 'should update the program and redirect' do
@@ -84,8 +91,8 @@ describe Admin::EventsController do
   end
 
   context 'destroy' do
-    before(:each) do 
-      Event.stub!(:find).and_return(@event = mock_model(Event))
+    before(:each) do
+      Event.stub!(:find).and_return(@event = mock_event)
     end
 
     it 'should destroy the program and redirect' do
