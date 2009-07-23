@@ -20,7 +20,7 @@ Example:
 This extension contains a copy of the Rails calendar date select plugin
 (c) Tim Harper. All other work (c) 2008 Nick Plante.
 
-Thanks to the efforts of viking, this extension is now 0.8.x compatible.
+Thanks to the efforts of Jeremy Stephens (viking), this extension is now 0.8.x compatible.
 
 http://github.com/zapnap/radiant-upcoming-events-extension
 http://github.com/timcharper/calendar_date_select
